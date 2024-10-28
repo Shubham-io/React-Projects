@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-import { type } from "os";
-import { resolve } from "path";
+
 
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
