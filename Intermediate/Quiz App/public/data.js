@@ -1,0 +1,42 @@
+export const data = [
+  {
+    question: "Which device is required for the Internet connection?",
+    option1: "Modem",
+    option2: "Router",
+    option3: "LAN Cable",
+    option4: "Pen Drive",
+    ans: 1,
+  },
+  {
+    question: "Which planet is known as the Red Planet?",
+    option1: "Earth",
+    option2: "Mars",
+    option3: "Jupiter",
+    option4: "Saturn",
+    ans: 2,
+  },
+  {
+    question: "What is the capital of France?",
+    option1: "Berlin",
+    option2: "Madrid",
+    option3: "Paris",
+    option4: "Rome",
+    ans: 3,
+  },
+  {
+    question: "What is the chemical symbol for water?",
+    option1: "H2O",
+    option2: "CO2",
+    option3: "O2",
+    option4: "H2",
+    ans: 1,
+  },
+  {
+    question: "Which gas is most abundant in the Earth's atmosphere?",
+    option1: "Oxygen",
+    option2: "Carbon Dioxide",
+    option3: "Nitrogen",
+    option4: "Hydrogen",
+    ans: 3,
+  },
+];
