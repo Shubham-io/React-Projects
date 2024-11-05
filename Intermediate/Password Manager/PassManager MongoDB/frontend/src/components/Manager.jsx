@@ -3,6 +3,7 @@ import { IoCloudyNight, IoEye, IoEyeOff } from "react-icons/io5";
 import AllPasswords from "./AllPasswords";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
+import { MdTableChart } from "react-icons/md";
 
 const Manager = () => {
   const [form, setForm] = useState({ site: "", username: "", password: "" });
@@ -30,34 +31,43 @@ const Manager = () => {
       return;
     }
 
-    // if any such id exists in the db, delelte it
-    await fetch("http://localhost:3000/", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id: form.id }),
-    });
+    // check if an existing entry is being edited, means it has an ID
+    if (form.id) {
+      await fetch("http://localhost:3000/", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: form.id }),
+      });
 
-    setPasswordArray([...passwordArray, { ...form, id: uuidv4() }]);
+      // update the passwordArray with the edited entry (form )
+      setPasswordArray((prev) => [
+        ...prev.filter((item) => item.id !== form.id),
+        { ...form },
+      ]);
+    } else {
+      // if no id, create a new entry with new uuid
+      form.id = uuidv4();
+      setPasswordArray([...passwordArray, { ...form }]);
+    }
 
+    // saving entry to backend
     await fetch("http://localhost:3000/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ...form, id: uuidv4() }),
+      body: JSON.stringify(form),
     });
 
- 
     setForm({ site: "", username: "", password: "" });
- 
-
     toast.success("Password saved", {
       style: { backgroundColor: "#d4edda", color: "#155724" },
     });
   };
 
+ 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
